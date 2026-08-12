@@ -133,7 +133,7 @@ export default function Hero() {
               onMouseEnter={() => setBubble("GOOD BOY. GOOD PAYMENT.")}
               onMouseLeave={() => setBubble(null)}
               onClick={() =>
-                setBubble(CLICK_LINES[Math.floor(Math.random() * CLICK_LINES.length)])
+                setBubble(CLICK_LINES[Math.floor(Math.random() * CLICK_LINES.length)]!)
               }
               aria-label="Pet Bits"
             >
