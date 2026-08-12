@@ -5,15 +5,7 @@ import banner from "@/assets/bits-hero.png";
 import mascot from "@/assets/bits-mascot.png";
 import { project, isCaLive } from "@/config/project";
 import { toast } from "sonner";
-
-const CLICK_LINES = [
-  "PAYMENT CONFIRMED.",
-  "BITS HAS PAID THE BILL.",
-  "NO HUMAN REQUIRED.",
-  "GOOD BOY.",
-  "USDC SENT.",
-  "HE'S GOT HIS OWN WALLET.",
-];
+import { useTranslation } from "@/i18n";
 
 function Coins() {
   const coins = [
@@ -46,16 +38,17 @@ function Coins() {
 }
 
 export default function Hero() {
+  const { t } = useTranslation();
   const [bubble, setBubble] = useState<string | null>(null);
 
   const onCopyCa = useCallback(() => {
     if (!isCaLive) {
-      toast("CA is coming soon, good boy 🐕");
+      toast(t.hero.caSoon);
       return;
     }
     navigator.clipboard.writeText(project.contractAddress);
-    toast("Contract address copied ✓");
-  }, []);
+    toast(t.hero.caCopied);
+  }, [t]);
 
   return (
     <section id="home" className="relative overflow-hidden pt-28 pb-14 sm:pt-32 sm:pb-20">
@@ -75,7 +68,7 @@ export default function Hero() {
         >
           <img
             src={banner}
-            alt="$BITS — robot dog paying for its own charging with USDC"
+            alt={t.hero.bannerAlt}
             className="aspect-[16/9] w-full object-contain sm:aspect-[3/1]"
             fetchPriority="high"
           />
@@ -97,7 +90,7 @@ export default function Hero() {
               transition={{ delay: 0.2 }}
               className="mt-4 text-2xl font-black tracking-tight sm:text-4xl"
             >
-              THE DOG THAT PAYS ITS OWN BILLS.
+              {t.hero.subtitle}
             </motion.p>
             <motion.p
               initial={{ opacity: 0 }}
@@ -105,7 +98,7 @@ export default function Hero() {
               transition={{ delay: 0.35 }}
               className="mt-3 text-sm font-bold tracking-[0.2em] text-cyan sm:text-base"
             >
-              I DON'T BARK. I PAY WITH USDC.
+              {t.hero.byline}
             </motion.p>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center lg:justify-start">
@@ -115,13 +108,13 @@ export default function Hero() {
                 rel="noopener noreferrer"
                 className="animate-pulse-glow inline-flex items-center justify-center gap-2 rounded-full bg-primary px-8 py-4 text-sm font-black tracking-[0.14em] text-primary-foreground transition-transform hover:scale-105"
               >
-                BUY $BITS <ArrowUpRight size={16} />
+                {t.hero.buy} <ArrowUpRight size={16} />
               </a>
               <button
                 onClick={onCopyCa}
                 className="inline-flex items-center justify-center gap-2 rounded-full border border-cyan/50 px-8 py-4 text-sm font-black tracking-[0.14em] text-cyan transition-colors hover:bg-cyan/10"
               >
-                <Copy size={15} /> COPY CA · {project.contractAddress}
+                <Copy size={15} /> {t.hero.copyCa} · {project.contractAddress}
               </button>
             </div>
           </div>
@@ -130,16 +123,16 @@ export default function Hero() {
             <button
               type="button"
               className="group relative block w-full cursor-pointer"
-              onMouseEnter={() => setBubble("GOOD BOY. GOOD PAYMENT.")}
+              onMouseEnter={() => setBubble(t.hero.clickLines[0] ?? null)}
               onMouseLeave={() => setBubble(null)}
               onClick={() =>
-                setBubble(CLICK_LINES[Math.floor(Math.random() * CLICK_LINES.length)]!)
+                setBubble(t.hero.clickLines[Math.floor(Math.random() * t.hero.clickLines.length)] ?? null)
               }
-              aria-label="Pet Bits"
+              aria-label={t.hero.petBits}
             >
               <img
                 src={mascot}
-                alt="$BITS robot dog mascot holding a USDC payment phone"
+                alt={t.hero.mascotAlt}
                 className="animate-float w-full drop-shadow-[0_0_40px_oklch(0.58_0.24_260/0.5)] transition-transform group-hover:scale-105"
               />
               {bubble && (
@@ -161,11 +154,13 @@ export default function Hero() {
         <div className="animate-marquee flex w-max gap-8 whitespace-nowrap text-sm font-black tracking-[0.2em] text-muted-foreground">
           {Array.from({ length: 2 }).map((_, i) => (
             <span key={i} className="flex gap-8">
-              <span>NO OWNER.</span><span className="text-cyan">NO LEASH.</span>
-              <span>JUST USDC.</span><span className="text-cyan">GOOD BOY. GOOD PAYMENT.</span>
-              <span>I DON'T BARK. I PAY.</span>
-              <span className="text-cyan">REAL DOGS NEED FOOD. BITS NEEDS USDC.</span>
-              <span>HE DOESN'T ASK FOR MONEY. HE HAS A WALLET.</span>
+              <span>{t.hero.marquee[0]}</span>
+              <span className="text-cyan">{t.hero.marquee[1]}</span>
+              <span>{t.hero.marquee[2]}</span>
+              <span className="text-cyan">{t.hero.marquee[3]}</span>
+              <span>{t.hero.marquee[4]}</span>
+              <span className="text-cyan">{t.hero.marquee[5]}</span>
+              <span>{t.hero.marquee[6]}</span>
             </span>
           ))}
         </div>

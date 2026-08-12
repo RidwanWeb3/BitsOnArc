@@ -1,23 +1,15 @@
 import { useEffect, useRef, useState } from "react";
+import { useTranslation, type Translations } from "@/i18n";
 
-const LINES = [
-  { t: "> bits.status()", c: "text-cyan" },
-  { t: "BATTERY: 12% — LOW", c: "text-destructive" },
-  { t: "> locating charging station...", c: "text-muted-foreground" },
-  { t: "STATION FOUND: DOCK-07", c: "text-foreground" },
-  { t: "> requesting power quote...", c: "text-muted-foreground" },
-  { t: "QUOTE: 1.42 USDC", c: "text-foreground" },
-  { t: "> wallet.sign(tx)", c: "text-cyan" },
-  { t: "PAYMENT CONFIRMED ✓", c: "text-success" },
-  { t: "CHARGING... 12% → 100%", c: "text-foreground" },
-  { t: "NO HUMAN INVOLVED.", c: "text-cyan" },
-  { t: "GOOD BOY. GOOD PAYMENT.", c: "text-success" },
-];
+type TerminalLines = Translations["terminal"]["lines"];
 
 export default function BitsTerminal() {
+  const { t } = useTranslation();
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(false);
+  const term = t.terminal as Translations["terminal"];
+  const LINES: TerminalLines = term.lines;
 
   useEffect(() => {
     const el = ref.current;
@@ -36,18 +28,20 @@ export default function BitsTerminal() {
       const r = setTimeout(() => setCount(0), 3500);
       return () => clearTimeout(r);
     }
-    const t = setTimeout(() => setCount((c) => c + 1), 620);
-    return () => clearTimeout(t);
-  }, [active, count]);
+    const timer = setTimeout(() => setCount((c) => c + 1), 620);
+    return () => clearTimeout(timer);
+  }, [active, count, LINES.length]);
 
   return (
     <section className="py-24">
       <div className="mx-auto max-w-3xl px-4 sm:px-6">
         <h2 className="text-center text-4xl font-black tracking-tighter sm:text-6xl">
-          THE <span className="gradient-text">$BITS</span> TERMINAL
+          {term.title ? `${term.title} ` : ""}
+          <span className="gradient-text">{term.titleAccent}</span>
+          {" "}{term.titleSuffix}
         </h2>
         <p className="mt-2 text-center text-xs font-bold tracking-[0.22em] text-muted-foreground">
-          LIVE SIMULATION · MACHINE-TO-MACHINE PAYMENT
+          {term.subtitle}
         </p>
 
         <div

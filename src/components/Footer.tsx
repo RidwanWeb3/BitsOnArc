@@ -1,7 +1,9 @@
 import { project } from "@/config/project";
 import logo from "@/assets/bits-logo.png";
+import { useTranslation, formatYear } from "@/i18n";
 
 export default function Footer() {
+  const { t } = useTranslation();
   return (
     <footer className="border-t border-border py-14">
       <div className="mx-auto max-w-5xl px-4 sm:px-6">
@@ -9,7 +11,7 @@ export default function Footer() {
           <div className="flex min-w-0 items-center gap-3">
             <img src={logo} alt="" aria-hidden className="h-10 w-10 shrink-0 object-contain" />
             <p className="truncate text-xs font-bold tracking-[0.18em] text-muted-foreground">
-              $BITS · {new Date().getFullYear()}
+              {formatYear(t.footer.rights)}
             </p>
           </div>
           <div className="flex items-center gap-5">
@@ -19,7 +21,7 @@ export default function Footer() {
               rel="noopener noreferrer"
               className="shrink-0 text-xs font-black tracking-[0.18em] text-cyan hover:underline"
             >
-              TELEGRAM
+              {t.footer.telegram}
             </a>
             <a
               href={project.xUrl}
@@ -27,7 +29,7 @@ export default function Footer() {
               rel="noopener noreferrer"
               className="shrink-0 text-xs font-black tracking-[0.18em] text-cyan hover:underline"
             >
-              X / TWITTER
+              {t.footer.x}
             </a>
           </div>
         </div>

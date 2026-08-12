@@ -1,19 +1,15 @@
 import { useEffect, useState } from "react";
-import { Menu, X as XIcon } from "lucide-react";
+import { Menu, X as XIcon, Languages } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import logo from "@/assets/bits-logo.png";
 import { project } from "@/config/project";
-
-const links = [
-  { label: "HOME", href: "#home" },
-  { label: "HISTORY", href: "#history" },
-  { label: "MEMES", href: "#memes" },
-  { label: "COMMUNITY", href: "#community" },
-];
+import { useTranslation, type Locale } from "@/i18n";
 
 export default function Header() {
+  const { t, locale, setLocale } = useTranslation();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [langOpen, setLangOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -21,6 +17,18 @@ export default function Header() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  const links = [
+    { label: t.nav.home, href: "#home" },
+    { label: t.nav.history, href: "#history" },
+    { label: t.nav.memes, href: "#memes" },
+    { label: t.nav.community, href: "#community" },
+  ];
+
+  const locales: { value: Locale; label: string; flag: string }[] = [
+    { value: "en", label: "EN", flag: "🇺🇸" },
+    { value: "zh", label: "中文", flag: "🇨🇳" },
+  ];
 
   return (
     <header
@@ -49,16 +57,59 @@ export default function Header() {
         </nav>
 
         <div className="flex shrink-0 items-center gap-2">
+          <div className="relative">
+            <button
+              type="button"
+              onClick={() => setLangOpen((o) => !o)}
+              onBlur={() => setTimeout(() => setLangOpen(false), 150)}
+              className="grid h-10 w-10 shrink-0 place-items-center rounded-lg border border-border text-foreground transition-colors hover:bg-secondary"
+              aria-label="Change language"
+            >
+              <Languages size={18} />
+            </button>
+            <AnimatePresence>
+              {langOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: -4 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -4 }}
+                  className="absolute right-0 top-11 overflow-hidden rounded-xl border border-border bg-background/95 shadow-lg backdrop-blur"
+                >
+                  <div className="flex flex-col p-1">
+                    {locales.map((l) => (
+                      <button
+                        key={l.value}
+                        type="button"
+                        onClick={() => {
+                          setLocale(l.value);
+                          setLangOpen(false);
+                        }}
+                        className={`flex items-center gap-2 rounded-lg px-3 py-2 text-left text-xs font-black tracking-[0.12em] transition-colors ${
+                          locale === l.value
+                            ? "bg-primary text-primary-foreground"
+                            : "text-foreground hover:bg-secondary"
+                        }`}
+                      >
+                        <span>{l.flag}</span>
+                        <span>{l.label}</span>
+                      </button>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
           <a
             href={project.buyUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="animate-pulse-glow hidden rounded-full bg-primary px-5 py-2.5 text-xs font-black tracking-[0.14em] text-primary-foreground transition-transform hover:scale-105 sm:inline-block"
           >
-            BUY $BITS
+            {t.header.buy}
           </a>
           <button
-            aria-label="Toggle menu"
+            aria-label={t.header.toggleMenu}
             onClick={() => setOpen((o) => !o)}
             className="grid h-10 w-10 shrink-0 place-items-center rounded-lg border border-border text-foreground md:hidden"
           >
@@ -86,13 +137,29 @@ export default function Header() {
                   {l.label}
                 </a>
               ))}
+              <div className="mt-2 flex gap-2">
+                {locales.map((l) => (
+                  <button
+                    key={l.value}
+                    type="button"
+                    onClick={() => setLocale(l.value)}
+                    className={`flex-1 rounded-lg border px-3 py-2 text-xs font-black tracking-[0.12em] transition-colors ${
+                      locale === l.value
+                        ? "border-primary bg-primary text-primary-foreground"
+                        : "border-border text-foreground hover:bg-secondary"
+                    }`}
+                  >
+                    {l.flag} {l.label}
+                  </button>
+                ))}
+              </div>
               <a
                 href={project.buyUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-2 rounded-full bg-primary px-5 py-3 text-center text-sm font-black tracking-[0.14em] text-primary-foreground"
               >
-                BUY $BITS
+                {t.header.buy}
               </a>
             </div>
           </motion.nav>

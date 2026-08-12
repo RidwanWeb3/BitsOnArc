@@ -2,23 +2,22 @@ import { motion } from "framer-motion";
 import meme1 from "@/assets/bits-meme1.png";
 import meme2 from "@/assets/bits-meme2.png";
 import meme3 from "@/assets/bits-meme3.png";
+import { useTranslation } from "@/i18n";
 
-const memes = [
-  { src: meme1, alt: "$BITS will change your life meme", caption: "$BITS WILL CHANGE YOUR LIFE." },
-  { src: meme2, alt: "Feeding the robot dog a USDC coin", caption: "FEED HIM USDC. HE HANDLES THE REST." },
-  { src: meme3, alt: "Playing with the robot dog in front of an agentic economy whiteboard", caption: "THE AGENTIC ECONOMY, EXPLAINED." },
-];
+const IMAGES = [meme1, meme2, meme3];
 
 export default function MemeGallery() {
+  const { t } = useTranslation();
+  const items = t.memeGallery.items;
   return (
     <section id="memes" className="py-24">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <h2 className="text-4xl font-black tracking-tighter sm:text-7xl">MEME VAULT</h2>
+        <h2 className="text-4xl font-black tracking-tighter sm:text-7xl">{t.memeGallery.title}</h2>
         <p className="mt-2 text-sm font-bold tracking-[0.2em] text-cyan">
-          RIGHT-CLICK. SAVE. POST. REPEAT.
+          {t.memeGallery.subtitle}
         </p>
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {memes.map((m, i) => (
+          {items.map((m, i) => (
             <motion.figure
               key={m.caption}
               initial={{ opacity: 0, y: 24 }}
@@ -28,7 +27,7 @@ export default function MemeGallery() {
               className="panel group overflow-hidden"
             >
               <img
-                src={m.src}
+                src={IMAGES[i]}
                 alt={m.alt}
                 loading="lazy"
                 className="aspect-square w-full object-cover transition-transform duration-500 group-hover:scale-105"
