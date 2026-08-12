@@ -1,24 +1,63 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Toaster } from "@/components/ui/sonner";
+import Header from "@/components/Header";
+import Hero from "@/components/Hero";
+import MemeStatement from "@/components/MemeStatement";
+import WhatIsBits from "@/components/WhatIsBits";
+import BitsHistory from "@/components/BitsHistory";
+import BitsTerminal from "@/components/BitsTerminal";
+import MemeGallery from "@/components/MemeGallery";
+import Community from "@/components/Community";
+import Footer from "@/components/Footer";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+const TITLE = "$BITS — The Dog That Pays Its Own Bills";
+const DESC =
+  "$BITS is the community meme of Bits, OpenMind's robot dog that paid for its own charge in USDC. No owner. No leash. Just USDC.";
+
 export const Route = createFileRoute("/")({
   component: Index,
+  head: () => ({
+    meta: [
+      { title: TITLE },
+      { name: "description", content: DESC },
+      { property: "og:title", content: TITLE },
+      { property: "og:description", content: DESC },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "/" },
+      { property: "og:image", content: "/og-banner.png" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: "/og-banner.png" },
+    ],
+    links: [{ rel: "canonical", href: "/" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: "$BITS",
+          description: DESC,
+        }),
+      },
+    ],
+  }),
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="min-h-screen bg-background">
+      <Header />
+      <main>
+        <Hero />
+        <MemeStatement />
+        <WhatIsBits />
+        <BitsHistory />
+        <BitsTerminal />
+        <MemeGallery />
+        <Community />
+      </main>
+      <Footer />
+      <Toaster />
     </div>
   );
 }
