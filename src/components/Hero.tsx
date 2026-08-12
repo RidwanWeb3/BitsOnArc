@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Copy } from "lucide-react";
-import banner from "@/assets/bits-banner.png";
+import banner from "@/assets/bits-meme1.png";
 import mascot from "@/assets/bits-mascot.png";
 import { project, isCaLive } from "@/config/project";
 import { toast } from "sonner";
