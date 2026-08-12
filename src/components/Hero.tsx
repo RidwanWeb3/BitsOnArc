@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Copy } from "lucide-react";
-import banner from "@/assets/bits-meme1.png";
+import banner from "@/assets/bits-hero.png";
 import mascot from "@/assets/bits-mascot.png";
 import { project, isCaLive } from "@/config/project";
 import { toast } from "sonner";
@@ -71,12 +71,12 @@ export default function Hero() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="overflow-hidden rounded-3xl border border-border shadow-[var(--glow-blue)]"
+          className="overflow-hidden rounded-3xl border border-border bg-deep/60 shadow-[var(--glow-blue)]"
         >
           <img
             src={banner}
             alt="$BITS — robot dog paying for its own charging with USDC"
-            className="aspect-[16/9] w-full object-cover object-[62%_center] sm:aspect-[3/1] sm:object-center"
+            className="aspect-[16/9] w-full object-contain sm:aspect-[3/1]"
             fetchPriority="high"
           />
         </motion.div>
