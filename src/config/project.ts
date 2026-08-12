@@ -5,7 +5,7 @@ export const project = {
   tagline: "THE DOG THAT PAYS ITS OWN BILLS.",
   contractAddress: CONTRACT_ADDRESS,
   buyUrl: "https://radardex.pro/#0x931b614cd9906f09c1712f85d21e0600502b3757",
-  xUrl: "X_HANDLE",
+  xUrl: "https://x.com/BitsOnArc",
   telegramUrl: "https://t.me/bitsonarc",
   circleProof: "https://x.com/circle/status/2023759340079927315",
   openMindProof: "https://x.com/openmind_agi/status/2023803927960187005",
