@@ -21,6 +21,7 @@ export default function Header() {
   const links = [
     { label: t.nav.home, href: "#home" },
     { label: t.nav.history, href: "#history" },
+    { label: t.nav.tokenomics, href: "#tokenomics" },
     { label: t.nav.memes, href: "#memes" },
     { label: t.nav.community, href: "#community" },
   ];

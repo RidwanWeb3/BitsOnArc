@@ -7,6 +7,7 @@ import WhatIsBits from "@/components/WhatIsBits";
 import BitsHistory from "@/components/BitsHistory";
 import BitsTerminal from "@/components/BitsTerminal";
 import MemeGallery from "@/components/MemeGallery";
+import FeeStructure from "@/components/FeeStructure";
 import Community from "@/components/Community";
 import Footer from "@/components/Footer";
 import { useTranslation } from "@/i18n";
@@ -67,6 +68,7 @@ function Index() {
         <BitsHistory />
         <BitsTerminal />
         <MemeGallery />
+        <FeeStructure />
         <Community />
       </main>
       <Footer />

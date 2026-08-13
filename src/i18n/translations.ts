@@ -6,6 +6,7 @@ export interface Translations {
   nav: {
     home: string;
     history: string;
+    tokenomics: string;
     memes: string;
     community: string;
   };
@@ -84,6 +85,19 @@ export interface Translations {
     followX: string;
     note: string;
   };
+  feeStructure: {
+    badge: string;
+    title: string;
+    subtitle: string;
+    walletLabel: string;
+    walletCopy: string;
+    walletCopied: string;
+    allocationTitle: string;
+    marketing: string;
+    marketingDesc: string;
+    burn: string;
+    burnDesc: string;
+  };
   footer: {
     rights: string;
     telegram: string;
@@ -113,6 +127,7 @@ export const en: Translations = {
   nav: {
     home: "HOME",
     history: "HISTORY",
+    tokenomics: "TOKENOMICS",
     memes: "MEMES",
     community: "COMMUNITY",
   },
@@ -257,6 +272,19 @@ export const en: Translations = {
     followX: "FOLLOW $BITS ON X",
     note: "OFFICIAL LINKS. NO DISCORD.",
   },
+  feeStructure: {
+    badge: "FEE STRUCTURE",
+    title: "FEE ALLOCATION",
+    subtitle: "Transparent fee flow. No surprises.",
+    walletLabel: "FEE RECIPIENT WALLET",
+    walletCopy: "COPY WALLET",
+    walletCopied: "Wallet copied ✓",
+    allocationTitle: "HOW FEES ARE DISTRIBUTED",
+    marketing: "MARKETING",
+    marketingDesc: "Fees collected in USDC fund growth, campaigns and community operations.",
+    burn: "BURN",
+    burnDesc: "Fees collected in $BITS are permanently burned to reduce total supply.",
+  },
   footer: {
     rights: "$BITS · {year}",
     telegram: "TELEGRAM",
@@ -287,6 +315,7 @@ export const zh: Translations = {
   nav: {
     home: "首页",
     history: "历史",
+    tokenomics: "代币经济",
     memes: "梗图",
     community: "社区",
   },
@@ -427,6 +456,19 @@ export const zh: Translations = {
     joinTelegram: "加入 TELEGRAM",
     followX: "在 X 上关注 $BITS",
     note: "官方链接。无 DISCORD。",
+  },
+  feeStructure: {
+    badge: "费用结构",
+    title: "费用分配",
+    subtitle: "透明费用流向，无意外。",
+    walletLabel: "费用接收钱包",
+    walletCopy: "复制钱包",
+    walletCopied: "钱包地址已复制 ✓",
+    allocationTitle: "费用如何分配",
+    marketing: "营销",
+    marketingDesc: "以 USDC 形式收取的费用用于增长、活动和社区运营。",
+    burn: "销毁",
+    burnDesc: "以 $BITS 形式收取的费用将被永久销毁以减少总供应量。",
   },
   footer: {
     rights: "$BITS · {year}",
